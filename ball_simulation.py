@@ -3,9 +3,7 @@ import pygame
 pygame.init()
 screen=pygame.display.set_mode((700,700))
 
-var=500
-
-box=pygame.Rect((100,100,var,var))
+box=pygame.Rect((100,100,500,500))
 circle_radius=10
 pos=[250,250]
 velocity=[0,0]
@@ -14,33 +12,28 @@ g=10
 clock=pygame.time.Clock()
 
 def collision_y():
-    if pos[1]>(var+100)-circle_radius:
-        pos[1]=(var+100)-circle_radius
+    if pos[1] > box.bottom - circle_radius:
+        pos[1] = box.bottom - circle_radius
         return True
-    if pos[1]<100+circle_radius:
-        pos[1]=100+circle_radius
+    if pos[1] < box.top + circle_radius:
+        pos[1] = box.top + circle_radius
         return True
-    else:
-        return False
-    
+    return False
+
 def collision_x():
-    if pos[0]>(var+100)-circle_radius:
-        pos[0]=(var+100)-circle_radius
+    if pos[0] > box.right - circle_radius:
+        pos[0] = box.right - circle_radius
         return True
-    if pos[0]<100+circle_radius:
-        pos[0]=100+circle_radius
+    if pos[0] < box.left + circle_radius:
+        pos[0] = box.left + circle_radius
         return True
-    else:
-        return False
+    return False
 
 def physics(t):
-    global var
     if collision_x():
         velocity[0]=-velocity[0]
-        var-=1
     if collision_y():
         velocity[1]=-velocity[1]
-        var-=1
     velocity[1]-=g*t
     velocity[0]+=acceleration[0]
     velocity[1]+=acceleration[1]
