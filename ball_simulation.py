@@ -1,9 +1,9 @@
 import pygame
 
 pygame.init()
-screen=pygame.display.set_mode((500,500))
+screen=pygame.display.set_mode((700,700))
 
-var=300
+var=500
 
 box=pygame.Rect((100,100,var,var))
 circle_radius=10
@@ -34,10 +34,13 @@ def collision_x():
         return False
 
 def physics(t):
+    global var
     if collision_x():
         velocity[0]=-velocity[0]
+        var-=1
     if collision_y():
         velocity[1]=-velocity[1]
+        var-=1
     velocity[1]-=g*t
     velocity[0]+=acceleration[0]
     velocity[1]+=acceleration[1]
